@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import NavBar from '../components/NavBar';
+import { getStudents } from '../helpers/data/studentData';
+import Routes from '../helpers/Routes';
 
 function App() {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    getStudents().then(setStudents);
+  }, []);
+
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <>
+      <Router>
+        <NavBar />
+        <Routes students={students} setStudents={setStudents}/>
+      </Router>
+    </>
   );
 }
 

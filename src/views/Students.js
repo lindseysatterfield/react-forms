@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import firebase from 'firebase';
 import firebaseConfig from '../helpers/apiKeys';
 import '../App/App.scss';
-import StudentForm from '../StudentForm';
-import { getStudents } from '../helpers/data/studentData';
+// import StudentForm from '../StudentForm';
+// import { getStudents } from '../helpers/data/studentData';
 import StudentCard from '../components/StudentCard';
 
 firebase.initializeApp(firebaseConfig);
 
-function App() {
-  const [students, setStudents] = useState([]);
+function Students({ students, setStudents }) {
+  // const [students, setStudents] = useState([]);
 
-  useEffect(() => {
-    getStudents().then((response) => setStudents(response));
-  }, []);
+  // useEffect(() => {
+  //   getStudents().then((response) => setStudents(response));
+  // }, []);
 
   console.warn(students);
 
   return (
     <div className='App'>
-      <StudentForm
+      {/* <StudentForm
       formTitle='Form Name'
       setStudents={setStudents}
-      />
+      /> */}
         {students.map((studentInfo) => (
           <StudentCard
             key={studentInfo.firebaseKey}
@@ -37,4 +38,9 @@ function App() {
   );
 }
 
-export default App;
+Students.propTypes = {
+  students: PropTypes.array.isRequired,
+  setStudents: PropTypes.func.isRequired
+};
+
+export default Students;
