@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StudentForm from '../components/StudentCard';
+import StudentForm from '../StudentForm';
 
-export default function AddStudent({ setStudents }) {
+function AddStudent({ setStudents }) {
   return (
     <>
       <StudentForm
@@ -16,3 +16,5 @@ export default function AddStudent({ setStudents }) {
 AddStudent.propTypes = {
   setStudents: PropTypes.func.isRequired
 };
+
+export default AddStudent;
