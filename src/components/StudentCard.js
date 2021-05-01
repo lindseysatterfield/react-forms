@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Card,
   Button,
@@ -17,12 +18,16 @@ const StudentCard = ({
   setStudents
 }) => {
   const [editing, setEditing] = useState(false);
+  const history = useHistory();
   const handleClick = (type) => {
     switch (type) {
       case 'delete': deleteStudent(firebaseKey).then((studentArray) => setStudents(studentArray));
         break;
       case 'edit':
         setEditing((prevState) => !prevState);
+        break;
+      case 'view':
+        history.push(`students/${firebaseKey}`);
         break;
       default: console.warn('nothing selected');
     }
@@ -31,8 +36,9 @@ const StudentCard = ({
   return (
     <Card body>
       <CardTitle tag="h5">{name}</CardTitle>
-      <CardText>Grade: {grade}</CardText>
       <CardText>Teacher: {teacher}</CardText>
+      <CardText>Grade: {grade}</CardText>
+      <Button color="warning" onClick={() => handleClick('view')}>View Student</Button>
       <Button color="danger" onClick={() => handleClick('delete')}>Delete Student</Button>
       <Button color="info" onClick={() => handleClick('edit')}>
         {editing ? 'Close Form' : 'Edit Student'}
