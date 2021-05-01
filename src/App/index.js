@@ -1,39 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import firebase from 'firebase';
-import firebaseConfig from '../helpers/apiKeys';
-import './App.scss';
-import StudentForm from '../StudentForm';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 import { getStudents } from '../helpers/data/studentData';
-import StudentCard from '../components/StudentCard';
-
-firebase.initializeApp(firebaseConfig);
+import Routes from '../helpers/Routes';
 
 function App() {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    getStudents().then((response) => setStudents(response));
+    getStudents().then(setStudents);
   }, []);
 
-  console.warn(students);
-
   return (
-    <div className='App'>
-      <StudentForm
-      formTitle='Form Name'
-      setStudents={setStudents}
-      />
-        {students.map((studentInfo) => (
-          <StudentCard
-            key={studentInfo.firebaseKey}
-            firebaseKey={studentInfo.firebaseKey}
-            name={studentInfo.name}
-            teacher={studentInfo.teacher}
-            grade={Number(studentInfo.grade)}
-            setStudents={setStudents}
-          />
-        ))}
-    </div>
+    <>
+      <Router>
+        <NavBar />
+        <Routes students={students} setStudents={setStudents}/>
+      </Router>
+    </>
   );
 }
 
