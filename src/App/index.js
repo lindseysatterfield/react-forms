@@ -36,7 +36,7 @@ function App() {
     <>
       <Router>
         <NavBar user={user}/>
-        <Routes students={students} setStudents={setStudents}/>
+        <Routes students={students} setStudents={setStudents} user={user}/>
       </Router>
     </>
   );
