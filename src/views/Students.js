@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import firebase from 'firebase';
-import firebaseConfig from '../helpers/apiKeys';
 import '../App/App.scss';
 import StudentCard from '../components/StudentCard';
 
-firebase.initializeApp(firebaseConfig);
 function Students({ students, setStudents }) {
   return (
     <div className='App'>
